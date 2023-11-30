@@ -1,0 +1,2 @@
+prescriptionId,patientId,doctorId,medicines
+1,1,1,ibuprofen:1:2:3;Lianhuaqingwen:4:2:3;azithromycin:1:2:3;
