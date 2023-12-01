@@ -20,7 +20,6 @@ class hospital
 private:
     //map<id, object>
     static map<int, doctor> doctorsList;
-    static map<int, patient> patientsList;
     static map<int, nurse> nursesList;
     static map<int, driver> driversList;
     static map<int, ambulance> ambulancesList;
@@ -47,6 +46,7 @@ private:
 
 
 public:
+    static map<int, patient> patientsList;
     static map<int, admin> adminsList;
     static void printDoctors();
     static void printPatients();

@@ -61,9 +61,6 @@ void bed::fillMap()
         b.isOccupied = true;
         hospital::bedsList[b.id] = b;
     }
-    for(int i=1;i<=hospital::bedsLimit;i++){
-        printf("bed occupied: %d\n", hospital::bedsList[i].getisOccupied());
-    }
     f.close();
     return;
 }

@@ -32,6 +32,7 @@ void ambulancesMenu();
 void prescriptionMenu();
 void bedMenu(); 
 void adminMenu();
+void changePasswordMenu();
 
 bool checklogin()
 {
@@ -671,6 +672,95 @@ void adminMenu()
     return;
 }
 
+void changePasswordMenu()
+{
+    int reqId;
+    int opt = 0;
+    string password;
+    cout << "\nOPTIONS:\n[1]: Filter by ID\n[2]: Filter by Name\n\n";
+    cin >> opt;
+    while (opt != 1 && opt != 2)
+        cout << "option 1 or 2?\n", cin >> opt;
+    //1: Filter by ID;
+    if (opt == 1)
+    {
+        cout << "\nEnter ID:\n";
+        cin >> reqId;
+        if (hospital::patientsList.find(reqId) != hospital::patientsList.end()){
+            cout << "Please enter password\n";
+            cin >> password;
+            if(password != hospital::patientsList[reqId].getPassword()){
+                cout << "\nWrong password! Permission denied!\n";
+                return;
+            }
+            else{
+                cout << "\nCorrect password!\n";
+            }
+        }    
+        else
+            cout << "\nNo matching record found!\n";
+    }
+    //2: Filter by name;
+    else if (opt == 2)
+    {
+        string reqFName, reqLName;
+        cout << "First Name:\n";
+        getline(cin >> ws, reqFName);
+        cout << "\nLast Name:\n";
+        getline(cin, reqLName);
+        vector<patient> matchingRecords;
+        for (auto i : hospital::patientsList)
+        {
+            if (i.second.getfirstName() == reqFName && i.second.getlastName() == reqLName)
+                matchingRecords.push_back(i.second);
+        }
+        cout << "\n";
+        cout << matchingRecords.size() << " matching record(s) found!\n";
+        for (auto i : matchingRecords)
+            i.printDetails();
+        char tt = 'N';
+        do
+        {
+            cout << "\nEnter the ID of the required patient: ";
+            cin >> reqId;
+            if (hospital::patientsList.find(reqId) != hospital::patientsList.end()){
+                cout << "Please enter password\n";
+                cin >> password;
+                if(password != hospital::patientsList[reqId].getPassword()){
+                    cout << "\nWrong password! Permission denied!\n";
+                    return;
+                }
+                else{
+                    cout << "\nCorrect password!\n";
+                }
+            }
+            else
+            {
+                cout << "\nInvalid ID!\nTry again? (Y = Yes || N = No)\n";
+                cin >> tt;
+                while (tt != 'Y' || tt != 'N')
+                    cout << "Y or N?\n", cin >> tt;
+            }
+        } while (tt == 'Y');
+    }
+    cout << "\n\nEnter new password:\n";
+    string n_password1, n_password2;
+    cin >> n_password1;
+    cout << "\nConfirm new password:\n";
+    cin >> n_password2;
+    while (n_password1 != n_password2)
+    {
+        cout << "\nPasswords don't match!\n";
+        cout << "\n\nEnter new password:\n";
+        cin >> n_password1;
+        cout << "\nConfirm new password:\n";
+        cin >> n_password2;
+    }
+    hospital::patientsList[reqId].setPassword(n_password1);
+    cout << "\nPassword changed successfully!\n";
+    return;
+}
+
 int main()
 {
     fstream f;
@@ -771,7 +861,8 @@ int main()
         cout << "[06] : AMBULANCES\n";
         cout << "[07] : PRESCRIPTIONS\n";
         cout << "[08] : BEDS\n";
-        cout << "[09] : ADMINS\n\n";
+        cout << "[09] : ADMINS\n";
+        cout << "[10] : CHANGE_PASSWORD\n\n";
         cout << "[-1] : EXIT\n";
         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
         cout << "Enter your choice: ";
@@ -820,6 +911,10 @@ int main()
         else if (category == 9)
         {
             adminMenu();
+        }
+        else if (category == 10)
+        {
+            changePasswordMenu();
         }
         else
         {

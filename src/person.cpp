@@ -12,6 +12,14 @@ person::person()
 {
     id = -1;
 }
+string person::getfirstName()
+{
+    return firstName;
+}
+string person::getlastName()
+{
+    return lastName;
+}
 void person::addPerson(int16_t minAge, int16_t maxAge)
 {
     //getting basic details of the person from the user side;

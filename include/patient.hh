@@ -28,5 +28,8 @@ public:
     void reportADeath();
     void removePerson();
     string getPassword();
+    
+    void setPassword(string np);
+
 };
 #endif // !PATIENT

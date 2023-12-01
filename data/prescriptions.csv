@@ -1,2 +1,6 @@
 prescriptionId,patientId,doctorId,medicines
 1,1,1,ibuprofen:1:2:3;Lianhuaqingwen:4:2:3;azithromycin:1:2:3;
+2,2,3,999:1:2:3;
+3,5,2,Lianhuaqingwen:4:2:3;azithromycin:1:2:3;
+4,6,4,ibuprofen:1:2:3;
+5,3,1,lianhuaqingwen:2:2:5;

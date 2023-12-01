@@ -556,6 +556,10 @@ void patient::removePerson()
 string patient::getPassword(){
     return password;
 }
+void patient::setPassword(string np){
+    password = np;
+    return;
+}
 // Removing a patient: it's rather "DISCHARGING a HOSPITALIZED patient";
 // If a patient wasn't hospitalized, just came to the hospital for an appointment with;
 // a doctor then that appointment object will be cleared on the next day automatically;
